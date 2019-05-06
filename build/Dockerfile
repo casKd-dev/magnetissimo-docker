@@ -7,9 +7,13 @@ RUN apk add --no-cache --update nodejs npm git &&\
     cd /magnetissimo &&\
     mix local.hex --force &&\
     mix local.rebar --force &&\
-    mix deps.get &&\
+    mix deps.get --only prod &&\
+    mix compile &&\
     cd /magnetissimo/apps/magnetissimo_web/assets &&\
     npm install &&\
+    node node_modules/webpack/bin/webpack.js --mode production &&\
+    cd /magnetissimo/apps/magnetissimo_web &&\
+    mix phx.digest &&\
     apk del git npm
 
 EXPOSE 4000
