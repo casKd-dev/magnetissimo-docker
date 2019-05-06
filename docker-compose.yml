@@ -1,0 +1,27 @@
+version: '3.7'
+
+networks:
+  magnetissimo:
+
+volumes:
+  database-data:
+
+services:
+  web:
+    image: caskd/magnetissimo:latest
+    restart: always
+    volumes:
+      - './config:/magnetissimo/config:rw'
+    ports:
+      - '4000:4000'
+    networks:
+      - magnetissimo
+
+  # Comment out the following part if you want to use a external database
+  database:
+    image: postgres
+    restart: always
+    volumes:
+      - 'database-data:/var/lib/postgresql/data:rw'
+    networks:
+      - magnetissimo
