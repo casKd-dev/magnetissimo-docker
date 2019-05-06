@@ -8,7 +8,7 @@ volumes:
 
 services:
   web:
-    image: caskd/magnetissimo:latest
+    image: caskd/magnetissimo-docker:latest
     restart: always
     volumes:
       - './config:/magnetissimo/config:rw'
