@@ -10,8 +10,15 @@ services:
   web:
     image: caskd/magnetissimo-docker:latest
     restart: always
+    environment:
+      MIX_ENV: 'prod'
+      DB_HOST: 'database'
+      DB_PORT: '5432'
+      MAG_DATABASE: 'torrent'
+      MAG_USERNAME: 'torrent'
+      MAG_PASSWORD: 'REPLACE_ME'
     volumes:
-      - './config:/magnetissimo/config:rw'
+      #- './config:/magnetissimo/config:rw' # Uncomment if you want to use a custom config instead of env vars
     ports:
       - '4000:4000'
     networks:
@@ -21,6 +28,9 @@ services:
   database:
     image: postgres
     restart: always
+    environment:
+      POSTGRES_USER: 'torrent'
+      POSTGRES_PASSWORD: 'REPLACE_ME'
     volumes:
       - 'database-data:/var/lib/postgresql/data:rw'
     networks:

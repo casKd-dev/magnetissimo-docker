@@ -18,6 +18,8 @@ RUN apk add --no-cache --update nodejs npm git &&\
 
 EXPOSE 4000
 
+COPY prod.exs /magnetissimo/config/prod.exs
+
 COPY entrypoint.sh /entrypoint.sh
 
 VOLUME /magnetissimo/config
